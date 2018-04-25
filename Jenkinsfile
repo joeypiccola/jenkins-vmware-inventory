@@ -17,7 +17,14 @@ pipeline {
         stage('push inventory') {
             steps {
                 powershell '''
-                    write-host 'push inventory'
+                    .\\Push-Inventory.ps1
+                '''
+            }
+        }
+        stage('roll inventory') {
+            steps {
+                powershell '''
+                    .\\Roll-Inventory.ps1
                 '''
             }
         }
