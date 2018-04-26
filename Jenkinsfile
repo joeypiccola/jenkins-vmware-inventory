@@ -10,7 +10,7 @@ pipeline {
         stage('build inventory') {
             steps {
                 powershell '''
-                    .\\Get-vmWareInventory.ps1
+                    .\\Get-Inventory.ps1
                 '''
             }
         }
@@ -24,7 +24,7 @@ pipeline {
         stage('roll inventory') {
             steps {
                 powershell '''
-                    .\\Roll-Inventory.ps1
+                    .\\Set-Inventory.ps1
                 '''
             }
         }
