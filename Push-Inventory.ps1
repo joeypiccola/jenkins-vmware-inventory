@@ -9,12 +9,6 @@ $mycreds = New-Object System.Management.Automation.PSCredential ($vcenter_user, 
 $path = '.\'
 $files = Get-ChildItem -Path $path -Filter "vcen*"
 $current = $files | Sort-Object -Property lastWriteTime | Select-Object -Last 1
-Copy-Item -Path $current.fullname -Destination '\\nikkor\c$\scripts\vcenter_inventory\vcen_inventory.json' -Force -Credential $mycreds
-
-if ($files.count -gt 5) {
-    $lastThree = $files | Sort-Object -Property lastWriteTime | select -Last 3
-    $olderFiles = Compare-Object -ReferenceObject $files -DifferenceObject $lastThree -PassThru
-    foreach ($file in $olderFiles) {
-        Remove-Item -Path $file.fullname
-    }
-}
+New-PSDrive -PSProvider FileSystem -Name 'toolRoot' -Root '\\nikkor.ad.piccola.us\c$\scripts\vcenter_inventory' -Credential $mycreds
+Copy-Item -Path $current.fullname -Destination 'toolRoot:\vcen_inventory.json' -Force
+Remove-PSDrive -Name 'toolRoot'
