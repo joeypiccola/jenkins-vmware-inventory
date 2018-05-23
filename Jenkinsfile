@@ -7,7 +7,7 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
 	stages {
-        stage('build-inventory') {
+        stage('build inventory') {
             steps {
                 powershell '''
                     .\\Get-Inventory.ps1
