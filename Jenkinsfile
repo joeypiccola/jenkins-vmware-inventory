@@ -14,7 +14,7 @@ pipeline {
                 '''
             }
         }
-        stage('push-inventory') {
+        stage('push inventory') {
             steps {
                 powershell '''
                     .\\Push-Inventory.ps1
