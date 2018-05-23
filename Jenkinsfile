@@ -14,14 +14,14 @@ pipeline {
                 '''
             }
         }
-        stage('push-inventory') {
+        stage('push inventory') {
             steps {
                 powershell '''
                     .\\Push-Inventory.ps1
                 '''
             }
         }
-        stage('roll-inventory') {
+        stage('roll inventory') {
             steps {
                 powershell '''
                     .\\Set-Inventory.ps1
