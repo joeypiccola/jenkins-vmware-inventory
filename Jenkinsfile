@@ -21,7 +21,7 @@ pipeline {
                 '''
             }
         }
-        stage('roll inventory') {
+        stage('roll-inventory') {
             steps {
                 powershell '''
                     .\\Set-Inventory.ps1
