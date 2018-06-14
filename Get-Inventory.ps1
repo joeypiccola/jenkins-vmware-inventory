@@ -1,5 +1,4 @@
 $ErrorActionPreference = 'stop'
-Write-Error 'fu'
 
 $vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_adpiccolaus_USR')).value
 $vcenter_pass = (Get-ChildItem -Path ('env:cred_vcenter_adpiccolaus_PSW')).value
