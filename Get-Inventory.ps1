@@ -1,3 +1,7 @@
+$ErrorActionPreference = 'Stop'
+$InformationPreference = 'Continue'
+$WarningPreference = 'Continue'
+
 $vcenter_user = (Get-ChildItem -Path ('env:cred_vcenter_adpiccolaus_USR')).value
 $vcenter_pass = (Get-ChildItem -Path ('env:cred_vcenter_adpiccolaus_PSW')).value
 
@@ -12,7 +16,7 @@ function Get-DatastoreClusters
 		[Parameter(Mandatory)]
 		[string]$Cluster
 	)
-	
+
 	begin
 	{
 		# verify we can connect to the provided cluster.
@@ -25,7 +29,7 @@ function Get-DatastoreClusters
 	{
 		$pods = Get-Cluster $Cluster | Get-Datastore | ?{ $_.ParentFolderId -like 'StoragePod-group-*' } | sort -Unique -Property ParentFolderID
 		Write-Verbose "Found $($pods.count)x datastore cluster on $cluster cluster."
-		
+
         # if we have datastore clusters, use those. else, just go to the datastores
         if ($pods)
         {
@@ -56,7 +60,7 @@ function Get-VDPortGroups
 		[Parameter(Mandatory)]
 		[string]$Cluster
 	)
-	
+
 	begin
 	{
 		# verify we can connect to the provided cluster.
@@ -109,14 +113,14 @@ foreach ($vcenter in $vcenters)
 			$datacenter_object = [pscustomobject]@{
 				name     = $datacenter
 				clusters = $clusters_col
-			}        
+			}
 			$datacenters_col += $datacenter_object
 		}
 
 		$vcenter_object = [pscustomobject]@{
 			name        = $vcenter
 			datacenters = $datacenters_col
-		}        
+		}
 		$vcenters_col += $vcenter_object
 	} catch {
 		Write-Error $_.Exception.Message
@@ -128,7 +132,7 @@ foreach ($vcenter in $vcenters)
 
 $inventory_object = [pscustomobject]@{
     vcenters = $vcenters_col
-}        
+}
 $inventory_col += $inventory_object
 
 $inventory_col | ConvertTo-Json -Depth 8 | add-content -Path .\vcen_inventory_$(get-date -f Mddyy-HHmmss).json
