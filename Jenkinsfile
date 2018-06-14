@@ -12,7 +12,7 @@ pipeline {
         stage('set-job-info') {
             steps {
                 script {
-                    currentBuild.description = "hi"
+                    currentBuild.description = env.ghprbPullTitle
                 }
             }
         }
