@@ -1,4 +1,4 @@
-def buildDesc = env.
+def buildDesc = env.ghprbPullTitle
 
 pipeline {
 	agent any
