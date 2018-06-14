@@ -1,3 +1,5 @@
+def buildDesc = env.ghprbPullTitle
+
 pipeline {
 	agent any
     environment {
@@ -7,6 +9,13 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
 	stages {
+        stage('set-job-info') {
+            steps {
+                script {
+                    currentBuild.description = env.ghprbPullTitle
+                }
+            }
+        }
         stage('build-inventory') {
             steps {
                 powershell '''
