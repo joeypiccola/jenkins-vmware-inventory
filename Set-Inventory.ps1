@@ -28,4 +28,4 @@ Write-Information $env:ghprbCommentBody
 Write-Information $env:sha1
 Write-Information 'End ghprb env dump'
 
-Write-Information 'c'
+Write-Information 'd'
