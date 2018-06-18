@@ -13,6 +13,8 @@ pipeline {
             steps {
                 script {
                     currentBuild.description = env.ghprbPullTitle
+                    echo GIT_BRANCH
+                    echo GIT_LOCAL_BRANCH
                 }
             }
         }
