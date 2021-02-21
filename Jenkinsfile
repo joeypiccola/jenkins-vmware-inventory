@@ -12,7 +12,11 @@ pipeline {
         stage('set-job-info') {
             steps {
                 script {
+                    GIT_BRANCH_testing = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                     currentBuild.description = env.ghprbPullTitle
+                    echo env.GIT_BRANCH
+                    echo env.GIT_LOCAL_BRANCH
+                    echo GIT_BRANCH_testing
                 }
             }
         }
